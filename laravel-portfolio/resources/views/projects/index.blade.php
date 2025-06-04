@@ -27,4 +27,6 @@
             @endforeach
         </tbody>
     </table>
+    <div class="d-flex justify-content-center py-3 gap-3">
+        <a href="{{route("projects.create")}}" class="btn btn-outline-warning">aggiungi nuovo progetto</a>
 @endsection

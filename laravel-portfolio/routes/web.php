@@ -39,4 +39,5 @@ Route::resource("posts",PostController::class)
 Route::resource("projects",ProjectController::class)
 ->middleware(["auth","verified"]);
 
+
 require __DIR__.'/auth.php';
