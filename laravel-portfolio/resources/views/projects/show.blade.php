@@ -3,7 +3,7 @@
 @section("title", $project->name)
 
 @section("content")
-    <a href="{{ route('projects.index') }}">Torna alla home</a>
+
     <div class="mt-3 mb-3">
         <h2>- {{ $project->client }}</h2>
         <small class="mx-auto p-3">{{ $project->period }}</small>
@@ -17,6 +17,7 @@
                 Elimina
             </button>
         </div>
+        <a href="{{ route('projects.index') }}">Torna a tutti i progetti</a>
     </section>
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">

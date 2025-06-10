@@ -16,7 +16,7 @@
         </div>
         <div class="form-control mb-3 d-flex flex-column">
             <label for="period">Data del progetto</label>
-            <input type="date" name="period" id="period" value="{{ $project->period }}">
+            <input type="date" name="period" id="period" value="{{ $project->period }}  ">
         </div>
         <div class="form-control mb-3 d-flex flex-column">
             <label for="summary">Scrivi una breve descrizione</label>
