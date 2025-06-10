@@ -7,6 +7,7 @@
                 <th class="bg-warning">name</th>
                 <th class="bg-warning">client</th>
                 <th class="bg-warning">period</th>
+                <th class="bg-warning">type</th>
                 <th class="bg-warning"></th>
             </tr>
 
@@ -19,6 +20,7 @@
                     <td class="bg-success">{{$project->name}}</td>
                     <td class="bg-success">{{$project->client}}</td>
                     <td class="bg-success">{{$project->period}}</td>
+                    <td class="bg-success">{{$project->type->name}}</td>
                     <td class="bg-success">
                         <a class="text-white" href="{{route("projects.show", $project)}}"> Visualizza</a>
                     </td>
