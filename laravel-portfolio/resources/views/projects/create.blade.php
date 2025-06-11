@@ -3,6 +3,8 @@
 @section("title", "Aggiungi un progetto")
 
 @section("content")
+
+
     <form action="{{ route('projects.store') }}" method="POST">
         @csrf
         <div class="form-control mb-3 d-flex flex-column">
@@ -33,6 +35,16 @@
                     <option value="">Nessun tipo disponibile</option>
                 @endif
             </select>
+        </div>
+        {{--technologies--}}
+        <div class="form-control mb-3 d-flex flex-wrap">
+            @foreach ($technologies as $technology)
+                <div class="technologies me-3">
+                    <input type="checkbox" name="technologies[]" value="{{$technology->id}}"
+                        id="technology-{{$technology->id}}">
+                    <label for="technology-{{$technology->id}}">{{$technology->name}}</label>
+                </div>
+            @endforeach
         </div>
         <input type="submit" value="Salva">
     </form>

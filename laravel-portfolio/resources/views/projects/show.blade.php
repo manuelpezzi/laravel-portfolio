@@ -4,21 +4,32 @@
 
 @section("content")
 
-    <div class="mt-3 mb-3">
+    <div class="mt-3 mb-3 d-flex flex-column">
         <h2>- {{ $project->client }}</h2>
-        <small class="mx-auto p-3">{{ $project->period }}</small>
+        <small>{{ $project->period }}</small>
+
+        <section>
+            <p>{{ $project->summary }}</p>
+            <p><strong>Tipo:</strong> {{ $project->type ? $project->type->name : 'Nessun tipo' }}</p>
+            <small>tecnologia:
+                @forelse ($project->technologies as $technology)
+                    <span class="badge" style="background-color: {{$technology->color}}">{{$technology->name}}</span>
+                @empty
+                    nessuna tecnologia
+
+                @endforelse
+
+            </small>
+            <div class="d-flex py-3 gap-3">
+                <a href="{{ route('projects.edit', $project) }}" class="btn btn-outline-warning">Modifica</a>
+                <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop">
+                    Elimina
+                </button>
+            </div>
+            <a href="{{ route('projects.index') }}">Torna a tutti i progetti</a>
+        </section>
     </div>
-    <section>
-        <p>{{ $project->summary }}</p>
-        <p><strong>Tipo:</strong> {{ $project->type ? $project->type->name : 'Nessun tipo' }}</p>
-        <div class="d-flex py-3 gap-3">
-            <a href="{{ route('projects.edit', $project) }}" class="btn btn-outline-warning">Modifica</a>
-            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                Elimina
-            </button>
-        </div>
-        <a href="{{ route('projects.index') }}">Torna a tutti i progetti</a>
-    </section>
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
