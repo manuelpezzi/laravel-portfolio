@@ -3,6 +3,13 @@
 @section("title", $project->name)
 
 @section("content")
+    @if ($project->image)
+
+
+        <div>
+            <img class="img-fluid w-50" src="{{asset("storage/" . $project->image)}}" alt="copertina progetto">
+        </div>
+    @endif
 
     <div class="mt-3 mb-3 d-flex flex-column">
         <h2>- {{ $project->client }}</h2>

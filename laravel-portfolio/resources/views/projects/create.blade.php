@@ -5,7 +5,7 @@
 @section("content")
 
 
-    <form action="{{ route('projects.store') }}" method="POST">
+    <form action="{{ route('projects.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-control mb-3 d-flex flex-column">
             <label for="name">Nome progetto</label>
@@ -19,6 +19,12 @@
             <label for="period">Data del progetto</label>
             <input type="date" name="period" id="period">
         </div>
+
+        <div class="form-control mb-3 d-flex flex-wrap gap-3">
+            <label for="image">immagine</label>
+            <input id="image" name="image" type="file">
+        </div>
+
         <div class="form-control mb-3 d-flex flex-column">
             <label for="summary">Scrivi una breve descrizione</label>
             <textarea name="summary" id="summary"></textarea>

@@ -7,6 +7,7 @@ use App\Models\Project;
 use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -46,6 +47,8 @@ class ProjectController extends Controller
       $newProject->summary = $data["summary"];
        $newProject->type_id = $data["type_id"];
 
+       $img_url= Storage::putFile("projects",$data['image']);
+       $newProject->image = $img_url;
       $newProject->save();
 //controlliamo se riceviamo le tech
 if ($request->has("technologies")){ 
@@ -85,6 +88,25 @@ if ($request->has("technologies")){
         $project->period = $data["period"];
         $project->summary = $data["summary"];
          $project->type_id = $data["type_id"];
+
+        if(array_key_exists("image",$data)&& $request->hasFile("image")){
+
+        //elimnare l'immagine precedente se presente
+if($project->image){    
+    Storage::disk('public')->delete($project->image);
+
+}
+        
+        //caricare la nuova
+        
+            $img_url= Storage::putFile("projects",$data['image'],'public');
+
+        //update db
+
+        $project->image = $img_url;
+
+        }
+
         $project->update();
         //verifichiamo se staimo ricevendo le tech
         if($request->has("technologies")){
@@ -105,7 +127,17 @@ if ($request->has("technologies")){
      */
     public function destroy(Project $project)
     {
-       $project->delete();
-       return redirect()->route("projects.index");
+        // Elimina l'immagine, se esiste
+    if ($project->image) {
+        Storage::disk('public')->delete($project->image);
+    }
+
+    // Rimuovi tutte le associazioni nella tabella pivot project_technology
+    $project->technologies()->detach();
+
+    // Elimina il progetto
+    $project->delete();
+
+    return redirect()->route("projects.index");
     }
 }
